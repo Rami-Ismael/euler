@@ -1,0 +1,29 @@
+ //simliar to the concept of moving addind bit
+        //ArrayList<Integer> list = new ArrayList<>();
+        int N = 1000;
+       LinkedList<Integer>[] list = new LinkedList[N+1];
+       list[0] = new LinkedList<>();
+       list[0].add(1);
+        list[1] = new LinkedList<>();
+        list[1].add(1);
+       int size = 1;
+       for (int current = size;current<=N;current++){
+           list[current] = new LinkedList<>();
+           int limit = list[current-1].size();
+           int pass = 0;
+           for (int i=0;i<limit;i++){
+               int value = list[current-1].removeLast();
+               //value *2
+               list[current].addFirst(((value*2)+pass)%10);
+               list[current-1].addFirst(value);
+               pass=((value*2)/10);
+           }
+           if (pass!=0)
+               list[current].addFirst(pass);
+       }
+       int sum = 0;
+       int i=0;
+       while (i<list[N].size()){
+           sum+=list[N].get(i++);
+       }
+       pw.println(sum);

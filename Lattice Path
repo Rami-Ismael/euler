@@ -1,0 +1,13 @@
+ static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+ private static void numerberFifteen(int n, int k) {
+        //lattice path
+        //Counting lattice path
+        //https://www.youtube.com/watch?v=wc1hZpDPQFA
+        BigInteger[] fact = new BigInteger[n+k+1];
+        fact[1] = new BigInteger(String.valueOf(1));
+        fact[2] = new BigInteger(String.valueOf(2));
+        for (int i=3;i<=n+k;i++)
+            fact[i] = (new BigInteger(String.valueOf(i))).multiply(fact[i-1]);
+       pw.println(fact[40].divide(fact[20].multiply(fact[20])));
+        pw.flush();
+    }

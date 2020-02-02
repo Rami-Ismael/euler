@@ -1,0 +1,22 @@
+   ArrayList<Integer>[] triangle = new ArrayList[1000];
+        for (int i=0;i<1000;i++){
+            triangle[i] = new ArrayList();
+        }
+        int i=0;
+        while ((line=br.readLine())!=null&&!line.equals("")){
+            st = new StringTokenizer(line);
+            while (st.hasMoreTokens())
+                triangle[i].add(Integer.parseInt(st.nextToken()));
+            i++;
+        }
+       //dp method
+        for (i = i-2;i>=0;i--){
+            for (int j=0;j<triangle[i].size();j++){
+                int left = triangle[i+1].get(j);
+                int right = triangle[i+1].get(j+1);
+                triangle[i].set(j,Math.max(triangle[i].get(j)+left,triangle[i].get(j)+right));
+            }
+        }
+        for (i=0;i<15;i++)
+            pw.println(triangle[i]);
+        pw.flush();

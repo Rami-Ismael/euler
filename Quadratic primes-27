@@ -1,0 +1,54 @@
+ private static void numerbertwentySeven() {
+        //Brute Force
+        //generate all prime numer
+        int len = 100000000;
+        BitSet bit = new BitSet(len);
+        HashSet<Integer> primes = new HashSet<>();
+        for (int i=2;i<len&&i>=2;i++){
+            if (!bit.get(i)){
+                for (int j = i;j<len&&j>=2;j+=i){
+                    bit.set(j,true);
+                }
+                primes.add(i);
+            }
+        }
+
+        int size= 0;
+        int maxA = 0;
+        int maxB = 0;
+        for (int a = -1000;a<=1000;a++){
+            for (int b = -1000;b<=1000;b++){
+                int n=0;
+                while (primes.contains((n*n)+(a*n)+b)){
+                    n++;
+                }
+                if (n>size){
+                    maxA = a;
+                    maxB = b;
+                    size = n;
+                }
+            }
+        }
+        System.out.println((size+" "+maxA*maxB));
+        pw.flush();
+        //this will make better space as you n = 0; then b must be prime
+        size = 0;
+        for (int a = -1000;a<=1000;a++){
+            for (int b = -1000;b<=1000;b++) {
+                if (primes.contains(b)) {
+                    int n = 0;
+                    while (primes.contains((n * n) + (a * n) + b)) {
+                        n++;
+                    }
+                    if (n > size) {
+                        maxA = a;
+                        maxB = b;
+                        size = n;
+                    }
+                }
+            }
+        }
+        System.out.println(size+" "+maxA*maxB);
+        pw.flush();
+
+    }
